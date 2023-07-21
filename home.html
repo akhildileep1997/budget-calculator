@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+         #col-4-1{
+            margin-left: 60px;
+            width: 300px;
+            border: 0.5px solid black;
+            border-radius: 20px;
+            background-color: aliceblue;
+            box-shadow: 0 0.6em 1.2em rgba(247, 247, 245, 0.758);
+  }
+  #col-4-2{
+            margin-left: 150px;
+            height: 180px;
+            width: 300px;
+            border: 0.5px solid black;
+            border-radius: 20px;
+            background-color: aliceblue;
+            box-shadow: 0 0.6em 1.2em rgba(247, 247, 245, 0.758);
+  }
+  #balanceScreen{
+    height: 80px;
+  }
+  #col-4-3{
+            width: 300px;
+            margin-left: 150px;
+            border: 0.5px solid black;
+            border-radius: 20px;
+            background-color: aliceblue;
+            box-shadow: 0 0.6em 1.2em rgba(247, 247, 245, 0.758);
+  }
+  
+    </style>
+   </head>
+
+
+<body  style="background-color: rgba(0, 0, 0, 0.715);">
+    <!-- nav-bar -->
+    <nav id="nav" class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a style="font-size: 30px;" class="navbar-brand" href="#">
+            <img src="https://t4.ftcdn.net/jpg/01/32/04/47/500_F_132044747_Pg8ExvziXit2ztfzu5hzWR2zmv1hoHa4.jpg" alt="Logo" width="50" height="50" class="d-inline-block align-text-top">
+                      Budget Calculator
+          </a>
+        </div>
+      </nav>
+
+      <div class="container">
+        <div style="margin-top: 100px;" class="row">
+        <!-----Income-->
+            <div id="col-4-1" class="col-4">
+                    <h3 class="text-center mt-3 text-success">Add Income</h3>
+                     <form action="" id="myformInc">
+                    <label class="mt-3">Add particulars</label>
+                    <input id="incomeName" class="form-control" type="text" placeholder="Add Particulars" >
+                    <label class="mt-3">Enter Amount</label>
+                    <input id="incomeAmt" class="form-control"  type="number" placeholder="Enter Amount" >
+                   <button type="button" class=" exp-btn btn btn-success mb-3 mt-3" onclick="addIncome()" >Add Income </button>
+                    </form>
+            </div>
+
+        <!-----Balance-->
+            <div id="col-4-2" class="col-4">
+                <h3 class="text-center mt-3 text-warning">Balance</h3>
+                <input class="text-center form-control mt-3 mb-2" id="balanceInfo" type="text" placeholder="0" style="pointer-events: none; color: #edc308ac; min-height: 100px; border-radius: 20px;font-size: 55px;font-weight: 500;">
+            </div>
+
+        <!-----Expense-->
+            <div id="col-4-3" class="col-4">
+                <h3  class="text-center mt-3 text-danger" >Add Expense</h3>
+                         <form action="" id="myformExp">
+                        <label class="mt-3">Add Particulars</label>
+                        <input class="form-control" id="expenseName" type="text" placeholder="Add particular">
+                        <label class="mt-3" >Enter amount</label>
+                        <input class="form-control" id="expenseAmt" type="number" placeholder="Enter amount">
+                        <button type="button" class=" exp-btn btn btn-danger mb-3 mt-3 " onclick="addExpense()">Add Expense </button>
+                        </form>
+            </div>
+        </div>
+      </div>
+
+
+      <!-----History-->
+      <div style="margin-top: 100px;" class="container">
+        <div class="row">
+            <div class="col-12">
+                <center>
+                <h1 style="background-color: rgba(255, 166, 0, 0.425);" class="text-center text-light"> History</h1>
+                <div style="background-color:transparent;">
+                     <div id="incomeTable" class="table-left w-50 ">
+                             <table class="w-75 mt-4 text-light dataTable">
+                             
+                                
+                             <tbody id="result"  style="background-color: rgba(249, 248, 248, 0);">
+                    
+                            </tbody>
+                         </table>
+                     </div>
+                
+                     <!-- expense -->
+                    
+                     <div id="expenseTable" class="table-right w-50">                             
+                                 <table class="w-75 mt-4  text-light ">
+                                 
+                                 <tbody id="resultExp" style="background-color:  rgba(248, 241, 241, 0);">
+                
+                                 </tbody>
+                             </table>
+                         </div>             <td style="color: green;font-size: 25px;font-weight: 400;"></td>
+                     </div>           
+                </center> 
+            </div>
+        </div>                      
+      </div>
+<!--Clear History-->
+<div class="remove text-center">
+    <button class="remove-btn btn btn-warning mt-5" onclick="clearAll()">Clear History</button>
+</div>
+<!---Logout--> 
+<div class="nav-right">
+            <button style="float: right;" class="logout-btn btn btn-danger me-5 mb-5" onclick="logout()">Logout</button>
+        </div>
+ </body>
+<script src="./main.js"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
